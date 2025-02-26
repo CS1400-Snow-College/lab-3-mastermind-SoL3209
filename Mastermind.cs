@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Globalization;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 Console.Clear();
 Random rand = new Random();
@@ -34,6 +36,8 @@ int wrong = 0;
 do
 {   
     guesses++;
+    wrong = 0;
+    correct = 0;
 
     Console.WriteLine($"guess {guesses}");
     Console.WriteLine("Guess four lowercase letters between a and g without any repeated letters");
@@ -58,6 +62,31 @@ do
             }
         }
 
+
+Console.WriteLine(guess);
+
+for (int i = 0; i < answer.Length; i++)
+{
+if (guess[i] == answer[i])
+{
+Console.BackgroundColor = ConsoleColor.Green;
+Console.Write(guess[i]);
+Console.BackgroundColor = ConsoleColor.Black;
+}else{
+for (int j = 0; j < answer.Length; j++)
+{
+if (guess[i] == answer[j] && i != j)
+{
+Console.BackgroundColor = ConsoleColor.Red;
+Console.Write(guess[i]);
+Console.BackgroundColor = ConsoleColor.Black;} else {
+if (guess[i] != answer[0] && guess[i] != answer[1] && guess[i] != answer[2] && guess[i] != answer[3]){
+Console.Write(guess[i]);
+break;
+}}}}}
+Console.WriteLine("");
+
+
     Console.WriteLine($" {correct} Correct letters and places");
     Console.WriteLine($" {wrong} Correct letters and wrong places");
     Console.WriteLine("(press any key to continue)");
@@ -67,4 +96,7 @@ do
 
 while (guess != answer);
 
+if (guess == answer){
+Console.WriteLine($"Congratulations, you won in {guesses} moves!");
+}
 Console.ReadKey();
